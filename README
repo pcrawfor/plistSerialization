@@ -1,0 +1,41 @@
+plistSerialization is a set of categories for Cocoa that provide simplified plist serialization support
+
+Usage is simple
+
+// Create an array from the property list data
+NSArray *items = [NSArray arrayWithPropertyListData:data];
+
+// Generate the property list data from an existing array
+[items propertyListData];
+
+// Create a dictionary from the property list data
+NSDictionary *itemDict = [NSDictionary dictionaryWithPropertyListData:data];
+
+// Generate the property list data from an existing dictionary
+[itemDict propertyListData];
+
+
+Using ASIHTTPRequest to load the property list data you could do the following
+eg.
+
+  ASIHTTPRequest *request = [DBRequest getWithPath:path];    
+        
+  NSString *response;
+  NSError *error = [request error];
+  if (!error) {
+    response = [request responseString];
+    DLog(@"response %@ | statusCode: %d", response, request.responseStatusCode);
+    
+    if(request.responseStatusCode == HTTP_200_SUCCESS) {
+      DLog(@"successful response");            
+      NSArray *parsedItems = [NSArray arrayWithPropertyListData:[request responseData]]
+    }
+  }
+  
+  
+Thanks
+======
+
+These categories provide simple plist serialization helpers for NSArray and NSDictionary
+
+Copyright (c) 2010 Paul Crawford, released under the MIT license
